@@ -1,6 +1,7 @@
 package com.example.bootiful.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,20 +10,16 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "DirectoryTable")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Directory extends Catalog {
 
-    private String pathToDirectory;
+    @OneToMany(mappedBy = "id", cascade = {CascadeType.REMOVE})
+    private Set<Catalog> catalogSet;
 
-    @Column
-    private String name;
+    public Directory() {
+    }
 
-    @OneToMany(mappedBy = "directory", cascade = CascadeType.ALL)
-    private Set<File> fileList;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="id", insertable = false, updatable = false)
-    private Directory parentDirectory;
-
+    public Directory(Long id, LocalDate addingDate, String name, String pathToDirectory, Directory parentDirectory, Set<Catalog> catalogSet) {
+        super(id, addingDate, name, pathToDirectory, parentDirectory);
+        this.catalogSet = catalogSet;
+    }
 }

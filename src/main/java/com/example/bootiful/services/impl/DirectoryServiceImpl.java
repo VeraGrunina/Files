@@ -5,9 +5,11 @@ import com.example.bootiful.repositories.DirectoryRepository;
 import com.example.bootiful.services.DirectoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Service
 public class DirectoryServiceImpl implements DirectoryService {
     private final DirectoryRepository directoryRepository;

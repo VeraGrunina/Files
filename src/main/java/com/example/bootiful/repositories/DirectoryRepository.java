@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DirectoryRepository extends JpaRepository<Directory, Long> {
-    @Override
     Directory findOne(Long aLong);
 }
