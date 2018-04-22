@@ -1,2 +1,0 @@
-INSERT INTO DirectoryTable(id, addingDate, name) VALUE
-(null, '7', "firstDir");

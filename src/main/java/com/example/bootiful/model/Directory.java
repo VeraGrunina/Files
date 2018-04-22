@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "DirectoryTable")
+@Entity(name = "DIRECTORY_TABLE")
 public class Directory extends Catalog {
 
     @OneToMany(mappedBy = "id", cascade = {CascadeType.REMOVE})

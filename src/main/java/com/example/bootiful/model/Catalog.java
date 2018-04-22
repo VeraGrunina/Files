@@ -17,8 +17,10 @@ public abstract class Catalog {
     @Column(name = "id", updatable = false, nullable = false)
     protected Long id;
 
+    @Column(name = "ADDING_DATE")
     private LocalDate addingDate;
 
+    @Column(name = "NAME")
     private String name;
 
     private String pathToDirectory;

@@ -1,0 +1,2 @@
+INSERT INTO DIRECTORY_TABLE(id, NAME) VALUES
+(null, "firstDir");
