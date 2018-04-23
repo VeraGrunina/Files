@@ -1,6 +1,7 @@
 package com.example.bootiful.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public abstract class Catalog {
 
     @Id

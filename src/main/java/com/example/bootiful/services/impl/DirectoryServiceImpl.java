@@ -12,6 +12,7 @@ import java.util.List;
 @Transactional
 @Service
 public class DirectoryServiceImpl implements DirectoryService {
+
     private final DirectoryRepository directoryRepository;
 
     @Autowired
@@ -26,6 +27,19 @@ public class DirectoryServiceImpl implements DirectoryService {
             throw new IllegalArgumentException("directory is null");
         }
         return directoryRepository.save(directory);
+    }
+
+    @Override
+    public Directory updateDirecoty(Directory directory) {
+        if (directory == null) {
+            throw new IllegalArgumentException("directory is null");
+        }
+        return directoryRepository.save(directory);
+    }
+
+    @Override
+    public void deleteDirectory(Long id) {
+        directoryRepository.delete(id);
     }
 
     @Override
