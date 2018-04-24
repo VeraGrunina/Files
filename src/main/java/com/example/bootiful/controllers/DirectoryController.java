@@ -23,9 +23,19 @@ public class DirectoryController {
     }
 
     @PutMapping("/directory/{id}")
-    public Directory updateDirectory(@RequestParam Long id, @RequestBody Directory directory) {
+    public Directory updateDirectory(@PathVariable Long id, @RequestBody Directory directory) {
         directory.setId(id);
         return directoryService.updateDirecoty(directory);
+    }
+
+/*    @GetMapping("/directory/{id}")
+    public Directory getDirectory(@PathVariable Long id) {
+    return directoryService.getDirectory(id);
+  }*/
+
+    @DeleteMapping("/directory/{id}")
+    public void deleteDirectory(@PathVariable Long id) {
+        directoryService.deleteDirectory(id);
     }
 
     @GetMapping("/directory/all")

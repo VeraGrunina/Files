@@ -4,11 +4,13 @@ import com.example.bootiful.model.File;
 import com.example.bootiful.repositories.FileRepository;
 import com.example.bootiful.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional
+@Service
 public class FileServiceImpl implements FileService {
 
     private final FileRepository fileRepository;
@@ -38,11 +40,16 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void deleteFile(Long id) {
-        fileRepository.delete(id);
+        fileRepository.deleteById(id);
     }
 
     @Override
     public List<File> getAllFiles() {
         return fileRepository.findAll();
+    }
+
+    @Override
+    public File getFile(Long id) {
+        return fileRepository.findById(id).get();
     }
 }

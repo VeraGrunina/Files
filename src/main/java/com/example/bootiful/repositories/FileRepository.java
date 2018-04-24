@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FileRepository extends JpaRepository<File, Long> {
-    File findOne(Long aLong);
 
-    void delete(Long aLong);
 }

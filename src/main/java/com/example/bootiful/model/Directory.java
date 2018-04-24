@@ -1,5 +1,11 @@
 package com.example.bootiful.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap.KeySetView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,18 +14,37 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import lombok.ToString;
 
+@Data
 @Entity(name = "DIRECTORY_TABLE")
-public class Directory extends Catalog {
+@ToString(exclude = {"fileSet"})
+public class Directory {
 
-    @OneToMany(mappedBy = "id", cascade = {CascadeType.REMOVE})
-    private Set<Catalog> catalogSet;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "directory_id", updatable = false, nullable = false)
+    protected Long id;
 
-    public Directory() {
-    }
+    @Column(name = "ADDING_DATE")
+    private LocalDate addingDate;
 
-    public Directory(Long id, LocalDate addingDate, String name, String pathToDirectory, Directory parentDirectory, Set<Catalog> catalogSet) {
-        super(id, addingDate, name, pathToDirectory, parentDirectory);
-        this.catalogSet = catalogSet;
-    }
+    @Column(name = "name_dir")
+    private String name;
+
+    private String pathToDirectory;
+
+//    @JsonBackReference
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="parent_id", insertable = false, updatable = false)
+    private Directory parentDirectory;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="parentDirectory")
+    private List<Directory> childDirectory = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "directory", cascade = {CascadeType.REMOVE})
+    private List<File> fileSet = new ArrayList<>();
+
 }

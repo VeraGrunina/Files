@@ -12,4 +12,6 @@ public interface FileService {
     void deleteFile(Long id);
 
     List<File> getAllFiles();
+
+    File getFile(Long id);
 }

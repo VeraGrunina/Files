@@ -12,4 +12,6 @@ public interface DirectoryService {
     void deleteDirectory(Long id);
 
     List<Directory> getAllDirectory();
+/*
+    Directory getDirectory(Long id);*/
 }
