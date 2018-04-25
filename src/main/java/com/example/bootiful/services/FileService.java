@@ -14,4 +14,6 @@ public interface FileService {
     List<File> getAllFiles();
 
     File getFile(Long id);
+
+    List<File> getByDirectoryId(Long id);
 }

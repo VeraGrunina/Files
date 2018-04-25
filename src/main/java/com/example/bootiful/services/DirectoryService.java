@@ -2,6 +2,7 @@ package com.example.bootiful.services;
 
 import com.example.bootiful.model.Directory;
 
+import com.example.bootiful.model.File;
 import java.util.List;
 
 public interface DirectoryService {
@@ -12,6 +13,8 @@ public interface DirectoryService {
     void deleteDirectory(Long id);
 
     List<Directory> getAllDirectory();
-/*
-    Directory getDirectory(Long id);*/
+
+    Directory getDirectory(Long id);
+
+    public List<File> getFilesInDirectory(Long id);
 }

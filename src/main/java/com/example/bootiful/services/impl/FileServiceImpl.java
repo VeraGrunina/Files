@@ -52,4 +52,11 @@ public class FileServiceImpl implements FileService {
     public File getFile(Long id) {
         return fileRepository.findById(id).get();
     }
+
+    @Override
+    public List<File> getByDirectoryId(Long id) {
+        return fileRepository.getAllByDirectoryIsInOrderByNameFile(id);
+    }
+
+
 }

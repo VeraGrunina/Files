@@ -1,6 +1,7 @@
 package com.example.bootiful.controllers;
 
 import com.example.bootiful.model.Directory;
+import com.example.bootiful.model.File;
 import com.example.bootiful.services.DirectoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +29,16 @@ public class DirectoryController {
         return directoryService.updateDirecoty(directory);
     }
 
-/*    @GetMapping("/directory/{id}")
+    @GetMapping("/directory/{id}")
     public Directory getDirectory(@PathVariable Long id) {
-    return directoryService.getDirectory(id);
-  }*/
+      return directoryService.getDirectory(id);
+    }
+
+    @GetMapping("/directory/{id}/files")
+    public List<File> getFilesByDirectory(@PathVariable Long id) {
+      return directoryService.getFilesInDirectory(id);
+    }
+
 
     @DeleteMapping("/directory/{id}")
     public void deleteDirectory(@PathVariable Long id) {
