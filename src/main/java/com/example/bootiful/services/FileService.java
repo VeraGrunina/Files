@@ -1,5 +1,6 @@
 package com.example.bootiful.services;
 
+import com.example.bootiful.model.Directory;
 import com.example.bootiful.model.File;
 
 import java.util.List;

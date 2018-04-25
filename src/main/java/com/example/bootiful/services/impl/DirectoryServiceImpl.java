@@ -18,13 +18,12 @@ import java.util.List;
 public class DirectoryServiceImpl implements DirectoryService {
 
     private final DirectoryRepository directoryRepository;
-    private final FileService fileService;
+    @Autowired
+    private FileService fileService;
 
     @Autowired
-    public DirectoryServiceImpl(DirectoryRepository directoryRepository,
-        FileService fileService) {
+    public DirectoryServiceImpl(DirectoryRepository directoryRepository) {
         this.directoryRepository = directoryRepository;
-        this.fileService = fileService;
     }
 
 
