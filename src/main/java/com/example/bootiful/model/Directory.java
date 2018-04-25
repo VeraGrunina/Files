@@ -26,7 +26,7 @@ public class Directory {
     @Column(name = "directory_id", updatable = false, nullable = false)
     protected Long id;
 
-    @Column(name = "ADDING_DATE")
+    @Column(name = "adding_date")
     private LocalDate addingDate;
 
     @Column(name = "name_dir")
@@ -34,7 +34,6 @@ public class Directory {
 
     private String pathToDirectory;
 
-//    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="parent_id", insertable = false, updatable = false)
     private Directory parentDirectory;
