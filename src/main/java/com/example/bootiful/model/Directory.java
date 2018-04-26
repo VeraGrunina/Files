@@ -34,16 +34,16 @@ public class Directory {
 
     private String pathToDirectory;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name="parent_id", insertable = false, updatable = false)
     private Directory parentDirectory;
 
     @JsonIgnore
-    @OneToMany(mappedBy="parentDirectory")
+    @OneToMany(mappedBy="parentDirectory", fetch = FetchType.LAZY)
     private List<Directory> childDirectory = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "directory", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "directory", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<File> fileSet = new ArrayList<>();
 
 }

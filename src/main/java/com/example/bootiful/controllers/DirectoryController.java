@@ -39,14 +39,18 @@ public class DirectoryController {
       return directoryService.getFilesInDirectory(id);
     }
 
-
-    @DeleteMapping("/directory/{id}")
-    public void deleteDirectory(@PathVariable Long id) {
-        directoryService.deleteDirectory(id);
-    }
-
     @GetMapping("/directory/all")
     public List<Directory> getListDirectory() {
         return directoryService.getAllDirectory();
+    }
+
+  @GetMapping("/directory/{id}/firstLevel")
+  public List<Object> getFirstLevelObjectsByDirectory(@PathVariable Long id) {
+    return directoryService.getFirstLevelObjectsInDirectory(id);
+  }
+
+    @DeleteMapping("/directory/{id}")
+    public void deleteDirectory(@PathVariable Long id) {
+      directoryService.deleteDirectory(id);
     }
 }

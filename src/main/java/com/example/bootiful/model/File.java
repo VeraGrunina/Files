@@ -23,7 +23,7 @@ public class File {
     private String nameFile;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="directory_id")
     private Directory directory;
 

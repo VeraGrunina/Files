@@ -6,6 +6,7 @@ import com.example.bootiful.repositories.DirectoryRepository;
 import com.example.bootiful.services.DirectoryService;
 import com.example.bootiful.services.FileService;
 import com.example.bootiful.services.RadixSortHelper;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,32 +49,6 @@ public class DirectoryServiceImpl implements DirectoryService {
         directoryRepository.deleteById(id);
     }
 
-//    @Override
-//    public List<Directory> getAllDirectory() {
-//
-//        List<Directory> all = directoryRepository.findAll();
-//
-//        List<String> directoryName = new LinkedList<>();
-//        List<Directory> sortDirectory = new LinkedList<>();
-//
-//        for (Directory d : all) {
-//            directoryName.add(d.getName());
-//        }
-//
-//        RadixSort.stringRadixSort(directoryName, 500);
-//
-//        for (String dn : directoryName) {
-//            for (Directory d : all) {
-//             if (d.getName().equals(dn)) {
-//                 sortDirectory.add(d);
-//                 all.remove(d);
-//                 break;
-//             }
-//            }
-//        }
-//        return sortDirectory;
-//    }
-
     @Override
     public List<Directory> getAllDirectory() {
 
@@ -108,6 +83,19 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Override
     public List<File> getFilesInDirectory(Long id) {
         return fileService.getByDirectoryId(id);
+    }
+
+    @Override
+    public List<Object> getFirstLevelObjectsInDirectory(Long id) {
+
+        List<Object> list = new LinkedList<>();
+
+        Directory parentDirectory = getDirectory(id);
+
+        list.addAll(directoryRepository.findByParentDirectory(parentDirectory));
+        list.addAll(fileService.getByDirectoryId(id));
+
+        return list;
     }
 }
 

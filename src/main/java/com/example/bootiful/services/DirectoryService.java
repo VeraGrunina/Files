@@ -17,4 +17,6 @@ public interface DirectoryService {
     Directory getDirectory(Long id);
 
     public List<File> getFilesInDirectory(Long id);
+
+    List<Object> getFirstLevelObjectsInDirectory(Long id);
 }
