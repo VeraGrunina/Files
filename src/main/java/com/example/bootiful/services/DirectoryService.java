@@ -1,5 +1,6 @@
 package com.example.bootiful.services;
 
+import com.example.bootiful.dto.DirectoryDto;
 import com.example.bootiful.model.Directory;
 
 import com.example.bootiful.model.File;
@@ -19,4 +20,6 @@ public interface DirectoryService {
     public List<File> getFilesInDirectory(Long id);
 
     List<Object> getFirstLevelObjectsInDirectory(Long id);
+
+    List<DirectoryDto> getFirstLevelDirectory(Long id);
 }

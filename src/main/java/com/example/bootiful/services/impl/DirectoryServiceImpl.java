@@ -1,5 +1,6 @@
 package com.example.bootiful.services.impl;
 
+import com.example.bootiful.dto.DirectoryDto;
 import com.example.bootiful.model.Directory;
 import com.example.bootiful.model.File;
 import com.example.bootiful.repositories.DirectoryRepository;
@@ -96,6 +97,25 @@ public class DirectoryServiceImpl implements DirectoryService {
         list.addAll(fileService.getByDirectoryId(id));
 
         return list;
+    }
+
+    @Override
+    public List<DirectoryDto> getFirstLevelDirectory(Long id) {
+        List<Directory> byParentDirectory = directoryRepository.findByParentDirectory(null);
+
+        List<DirectoryDto> dtoList = new ArrayList<>();
+
+        for (Directory dir : byParentDirectory) {
+            DirectoryDto addDir = DirectoryDto.builder()
+                    .localDate(dir.getAddingDate())
+                    .name(dir.getName())
+                    .id(dir.getId())
+                    .build();
+
+            dtoList.add(addDir);
+        }
+
+        return dtoList;
     }
 }
 
