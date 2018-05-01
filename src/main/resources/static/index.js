@@ -1,6 +1,7 @@
 
 function addDirectoryOnClick() {
    let input_value = $('#myInput').val();
+   let input_button = $('#myBestButton').
 
    $.ajax({
        url : "http://localhost:8080/directory",

@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel = "stylesheet">
     <link href="/style.css">
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <title>Directories And Files</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  } );
+    </script>
 </head>
 <body>
 <h1>Hello, world!</h1>
@@ -25,11 +50,17 @@
     </tbody>
 </table>
 
+<div id="dialog" title="Basic dialog">
+    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+<button id="opener">Open Dialog</button>
 
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <script src="/index.js"></script>
+
 </body>
 </html>
