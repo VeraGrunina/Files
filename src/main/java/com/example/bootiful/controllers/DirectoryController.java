@@ -27,6 +27,11 @@ public class DirectoryController {
         return directoryService.createDirectory(directory);
     }
 
+    @PostMapping("/directory/new")
+    public Directory createNewDirectory(@RequestBody String name) {
+        return directoryService.createDirectoryFromName(name);
+    }
+
     @PutMapping("/directory/{id}")
     public Directory updateDirectory(@PathVariable Long id, @RequestBody Directory directory) {
         directory.setId(id);

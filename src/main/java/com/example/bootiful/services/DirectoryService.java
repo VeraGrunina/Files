@@ -27,4 +27,6 @@ public interface DirectoryService {
     int countChildDirectory(Long parentId);
 
   List<DirectorySmallDto> getInnerFileOnClickButton(Long directoryId);
+
+    Directory createDirectoryFromName(String name);
 }

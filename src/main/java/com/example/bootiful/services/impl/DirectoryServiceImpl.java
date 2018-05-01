@@ -8,6 +8,8 @@ import com.example.bootiful.repositories.DirectoryRepository;
 import com.example.bootiful.services.DirectoryService;
 import com.example.bootiful.services.FileService;
 import com.example.bootiful.services.RadixSortHelper;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,7 +152,7 @@ public class DirectoryServiceImpl implements DirectoryService {
             for (Directory dir : childDirectory) {
                 DirectorySmallDto directorySmallDto = DirectorySmallDto.builder()
                     .name(dir.getName())
-                    .size("<DIR>")
+                    .size("&lt;DIR&gt;")
                     .build();
 
 
@@ -172,6 +174,16 @@ public class DirectoryServiceImpl implements DirectoryService {
         }
 
         return smallDtoList;
+    }
+
+    @Override
+    public Directory createDirectoryFromName(String name) {
+        Directory directory = new Directory();
+
+        directory.setName(name);
+        directory.setAddingDate(LocalDate.now());
+
+        return directoryRepository.save(directory);
     }
 }
 
