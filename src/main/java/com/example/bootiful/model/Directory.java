@@ -34,6 +34,7 @@ public class Directory {
 
     private String pathToDirectory;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name="parent_id", insertable = false, updatable = false)
     private Directory parentDirectory;

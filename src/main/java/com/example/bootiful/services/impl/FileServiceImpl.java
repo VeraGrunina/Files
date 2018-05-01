@@ -64,5 +64,10 @@ public class FileServiceImpl implements FileService {
         return fileRepository.getAllByDirectoryIsInOrderByNameFile(directory);
     }
 
+  @Override
+  public int countFilesInDirectory(Long directoryId) {
+
+        return fileRepository.countFilesByDirectoryId(directoryId);
+  }
 
 }

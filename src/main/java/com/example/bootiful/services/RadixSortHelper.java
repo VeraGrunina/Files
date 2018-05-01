@@ -9,13 +9,13 @@ public class RadixSortHelper {
     String[] tempArray = new String[arr.length];
     Arrays.fill(countArray,0);
 
-    //increase count for char at index
+    //increase count for char at index.html
     for(int i=0;i<arr.length;i++){
       int charIndex = (arr[i].length()-1 < index) ? 0 : ((arr[i].charAt(index) - lower)+1);
       countArray[charIndex]++;
     }
 
-    //sum up countArray;countArray will hold last index for the char at each strings index
+    //sum up countArray;countArray will hold last index.html for the char at each strings index.html
     for(int i=1;i<countArray.length;i++){
       countArray[i] += countArray[i-1];
     }
