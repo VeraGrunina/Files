@@ -10,8 +10,10 @@ VALUES (2, 'first', null),
   (8, 'nex178t', 2),
   (9, 'next657', null),
   (10, '123next', 5),
-  (11, 'n9876 ext', null),
   (12, 'ne432xt', null);
+
+INSERT INTO DIRECTORY_TABLE (directory_id, name_dir, parent_id, adding_date)
+VALUES (11, 'n9876 ext', null, '2017-04-29');
 
 INSERT INTO File_Table(file_id, name_file, size_file, directory_id)
     VALUES (1, 'file txt', 3, 2),

@@ -1,6 +1,7 @@
 package com.example.bootiful.services.impl;
 
 import com.example.bootiful.dto.DirectoryDto;
+import com.example.bootiful.dto.DirectorySmallDto;
 import com.example.bootiful.model.Directory;
 import com.example.bootiful.model.File;
 import com.example.bootiful.repositories.DirectoryRepository;
@@ -38,7 +39,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public Directory updateDirecoty(Directory directory) {
+    public Directory updateDirectory(Directory directory) {
         if (directory == null) {
             throw new IllegalArgumentException("directory is null");
         }
@@ -106,16 +107,71 @@ public class DirectoryServiceImpl implements DirectoryService {
         List<DirectoryDto> dtoList = new ArrayList<>();
 
         for (Directory dir : byParentDirectory) {
+            int countChildDir = countChildDirectory(dir.getId());
+            int countFilesInDir = fileService.countFilesInDirectory(dir.getId());
+            int sizeFiles = 0;
+            List<File> fileSet = dir.getFileSet();
+
+            if (fileSet.size() != 0) {
+                for (File f:fileSet) {
+                    sizeFiles += f.getSizeFile();
+                }
+            }
+
             DirectoryDto addDir = DirectoryDto.builder()
                     .localDate(dir.getAddingDate())
                     .name(dir.getName())
                     .id(dir.getId())
+                    .countDirectory(countChildDir)
+                    .countFiles(countFilesInDir)
+                    .sumSizeFiles(sizeFiles)
                     .build();
 
             dtoList.add(addDir);
         }
 
         return dtoList;
+    }
+
+    @Override
+    public int countChildDirectory(Long parentId) {
+        return directoryRepository.countDirectoryByParentDirectoryId(parentId);
+    }
+
+    @Override
+    public List<DirectorySmallDto> getInnerFileOnClickButton(Long directoryId) {
+        Directory one = directoryRepository.getOne(directoryId);
+
+        List<Directory> childDirectory = one.getChildDirectory();
+
+        List<DirectorySmallDto> smallDtoList = new ArrayList<>();
+
+        if (childDirectory.size() > 0) {
+            for (Directory dir : childDirectory) {
+                DirectorySmallDto directorySmallDto = DirectorySmallDto.builder()
+                    .name(dir.getName())
+                    .size("<DIR>")
+                    .build();
+
+
+                smallDtoList.add(directorySmallDto);
+            }
+        }
+
+        List<File> fileList = one.getFileSet();
+
+        if (fileList.size() > 0) {
+            for (File f : fileList) {
+                DirectorySmallDto directorySmallDto = DirectorySmallDto.builder()
+                    .name(f.getNameFile())
+                    .size(f.getSizeFile() + "Byte")
+                    .build();
+
+                smallDtoList.add(directorySmallDto);
+            }
+        }
+
+        return smallDtoList;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.bootiful.controllers;
 
 import com.example.bootiful.dto.DirectoryDto;
+import com.example.bootiful.dto.DirectorySmallDto;
 import com.example.bootiful.model.Directory;
 import com.example.bootiful.model.File;
 import com.example.bootiful.services.DirectoryService;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -30,7 +30,7 @@ public class DirectoryController {
     @PutMapping("/directory/{id}")
     public Directory updateDirectory(@PathVariable Long id, @RequestBody Directory directory) {
         directory.setId(id);
-        return directoryService.updateDirecoty(directory);
+        return directoryService.updateDirectory(directory);
     }
 
     @GetMapping("/directory/{id}")
@@ -76,6 +76,11 @@ public class DirectoryController {
   @GetMapping("/directory/{id}/firstLevel")
   public List<Object> getFirstLevelObjectsByDirectory(@PathVariable Long id) {
     return directoryService.getFirstLevelObjectsInDirectory(id);
+  }
+
+  @GetMapping("directory/{id}/innerFiles")
+  public List<DirectorySmallDto> getInnerFilesWithButtonClick(@PathVariable Long id) {
+      return directoryService.getInnerFileOnClickButton(id);
   }
 
     @DeleteMapping("/directory/{id}")

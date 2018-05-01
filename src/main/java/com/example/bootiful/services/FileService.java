@@ -17,4 +17,6 @@ public interface FileService {
     File getFile(Long id);
 
     List<File> getByDirectoryId(Long id);
+
+    int countFilesInDirectory(Long directoryId);
 }

@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel = "stylesheet">
-    <link href="/style.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link href="style.css">
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <title>Directories And Files</title>
-
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <title>Directories And Files</title>
     <script>
         $( function() {
     $( "#dialog" ).dialog({
@@ -29,6 +28,7 @@
       $( "#dialog" ).dialog( "open" );
     });
   } );
+
     </script>
 </head>
 <body>
@@ -39,10 +39,14 @@
 
 <table class = "table table-striped table-bordered table-condensed table-hover">
     <thead>
-    <tr>
+    <tr class="table-info">
         <th scope="col">#</th>
         <th scope="col">Data</th>
         <th scope="col">Parent Directory</th>
+        <th scope="col">Count Directories</th>
+        <th scope="col">Count Files</th>
+        <th scope="col">Sum Size Files</th>
+        <th scope="col">Get Files</th>
     </tr>
     </thead>
     <tbody id="myCoursesTbody">
@@ -52,6 +56,18 @@
 
 <div id="dialog" title="Basic dialog">
     <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+
+    <table class = "table table-striped table-bordered table-condensed table-hover">
+        <thead>
+        <tr class="table-info">
+            <th scope="col">File</th>
+            <th scope="col">Size</th>
+        </tr>
+        </thead>
+        <tbody id="innerTableBody">
+
+        </tbody>
+    </table>
 </div>
 
 <button id="opener">Open Dialog</button>
@@ -59,8 +75,7 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="/index.js"></script>
+ <script src="index.js"></script>
 
 </body>
 </html>
