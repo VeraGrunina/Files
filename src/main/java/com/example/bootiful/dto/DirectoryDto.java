@@ -13,5 +13,5 @@ public class DirectoryDto {
     private String name;
     private int countDirectory;
     private int countFiles;
-    private int sumSizeFiles;
+    private String sumSizeFiles;
 }

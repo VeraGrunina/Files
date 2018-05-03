@@ -1,7 +1,6 @@
 
 function addDirectoryOnClick() {
    let input_value = $('#myInput').val();
-   let input_button = $('#myBestButton');
 
    let ajaxData = {
     name: input_value
@@ -42,15 +41,12 @@ $(function(){
     });
 });
 
-let button_value = $('.btn').button();
-
 function createTableBody(data1) {
 
-    var t = $('#myCoursesTbody');
+    var t = $('#myDirectoryTbody');
 
   $.each(data1, function(k,row) {
         var row_html = '<tr>' +
-        '<td>' + row.id + '</td>' +
         '<td>' + row.localDate + '</td>' +
         '<td>' + row.name + '</td>' +
             '<td>' + row.countDirectory + '</td>' +
@@ -77,15 +73,6 @@ function createTableBody(data1) {
                        console.log(data1);
            }
            });
-
-//        var tableIn = $('#innerTableBody');
-//        var row_htmlInner = '<tr>' +
-//            '<td>' + 'You' + '</td>' +
-//            '<td>' + 'Welcome' + '</td>' +
-//            '</tr>';
-
-//        tableIn.append(row_htmlInner);
-//          tableIn.html(row_htmlInner);
       });
 
     });
@@ -111,10 +98,9 @@ function createInnerTableBody(data2) {
 }
 
 function appendTableBody(row) {
-    var t = $('#myCoursesTbody');
+    var t = $('#myDirectoryTbody');
 
     var row_html = '<tr>' +
-            '<td>' + row.id + '</td>' +
             '<td>' + row.localDate + '</td>' +
             '<td>' + row.name + '</td>' +
                 '<td>' + row.countDirectory + '</td>' +
@@ -124,5 +110,4 @@ function appendTableBody(row) {
             '</tr>';
 
       t.append(row_html);
-
 }

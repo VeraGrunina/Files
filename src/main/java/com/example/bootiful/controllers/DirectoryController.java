@@ -28,20 +28,9 @@ public class DirectoryController {
         return directoryService.createDirectoryFromName(body.get("name"));
     }
 
-    @PutMapping("/directory/{id}")
-    public Directory updateDirectory(@PathVariable Long id, @RequestBody Directory directory) {
-        directory.setId(id);
-        return directoryService.updateDirectory(directory);
-    }
-
     @GetMapping("/directory/{id}")
     public Directory getDirectory(@PathVariable Long id) {
       return directoryService.getDirectory(id);
-    }
-
-    @GetMapping("/directory/{id}/files")
-    public List<File> getFilesByDirectory(@PathVariable Long id) {
-      return directoryService.getFilesInDirectory(id);
     }
 
     @GetMapping("/directory/all")
@@ -84,8 +73,4 @@ public class DirectoryController {
       return directoryService.getInnerFileOnClickButton(id);
   }
 
-    @DeleteMapping("/directory/{id}")
-    public void deleteDirectory(@PathVariable Long id) {
-      directoryService.deleteDirectory(id);
-    }
 }

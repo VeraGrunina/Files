@@ -31,28 +31,6 @@ public class DirectoryServiceImpl implements DirectoryService {
         this.directoryRepository = directoryRepository;
     }
 
-
-    @Override
-    public Directory createDirectory(Directory directory) {
-        if (directory == null) {
-            throw new IllegalArgumentException("directory is null");
-        }
-        return directoryRepository.save(directory);
-    }
-
-    @Override
-    public Directory updateDirectory(Directory directory) {
-        if (directory == null) {
-            throw new IllegalArgumentException("directory is null");
-        }
-        return directoryRepository.save(directory);
-    }
-
-    @Override
-    public void deleteDirectory(Long id) {
-        directoryRepository.deleteById(id);
-    }
-
     @Override
     public List<Directory> getAllDirectory() {
 
@@ -85,11 +63,6 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public List<File> getFilesInDirectory(Long id) {
-        return fileService.getByDirectoryId(id);
-    }
-
-    @Override
     public List<Object> getFirstLevelObjectsInDirectory(Long id) {
 
         List<Object> list = new LinkedList<>();
@@ -104,7 +77,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 
     @Override
     public List<DirectoryDto> getFirstLevelDirectory(Long id) {
-        List<Directory> byParentDirectory = directoryRepository.findByParentDirectory(null);
+        List<Directory> byParentDirectory = directoryRepository.findByParentDirectoryIdOrderByName(null);
 
         List<DirectoryDto> dtoList = new ArrayList<>();
 
@@ -112,6 +85,7 @@ public class DirectoryServiceImpl implements DirectoryService {
             int countChildDir = countChildDirectory(dir.getId());
             int countFilesInDir = fileService.countFilesInDirectory(dir.getId());
             int sizeFiles = 0;
+            String strSizeFiles;
             List<File> fileSet = dir.getFileSet();
 
             if (fileSet.size() != 0) {
@@ -120,19 +94,35 @@ public class DirectoryServiceImpl implements DirectoryService {
                 }
             }
 
+            strSizeFiles = getStringSizeFileHelper(sizeFiles);
+
             DirectoryDto addDir = DirectoryDto.builder()
                     .localDate(dir.getAddingDate())
                     .name(dir.getName())
                     .id(dir.getId())
                     .countDirectory(countChildDir)
                     .countFiles(countFilesInDir)
-                    .sumSizeFiles(sizeFiles)
+                    .sumSizeFiles(strSizeFiles)
                     .build();
 
             dtoList.add(addDir);
         }
 
         return dtoList;
+    }
+
+    private String getStringSizeFileHelper(int sizeFiles) {
+        String strSizeFiles;
+        if (sizeFiles < 1024) {
+            strSizeFiles = sizeFiles + "byte";
+        } else if ( sizeFiles > 1024  && sizeFiles < 1024*1024) {
+            double newSize = sizeFiles / 1024;
+            strSizeFiles = String.format("%.2f", newSize) + "Kb";
+        } else {
+            double newSize = (sizeFiles / 1024) / 1024;
+            strSizeFiles = String.format("%.2f", newSize) + "Mb";
+        }
+        return strSizeFiles;
     }
 
     @Override
@@ -164,9 +154,14 @@ public class DirectoryServiceImpl implements DirectoryService {
 
         if (fileList.size() > 0) {
             for (File f : fileList) {
+                int sizeFiles = f.getSizeFile();
+                String strSizeFiles;
+
+                strSizeFiles = getStringSizeFileHelper(sizeFiles);
+
                 DirectorySmallDto directorySmallDto = DirectorySmallDto.builder()
                     .name(f.getNameFile())
-                    .size(f.getSizeFile() + "Byte")
+                    .size(strSizeFiles)
                     .build();
 
                 smallDtoList.add(directorySmallDto);
@@ -185,16 +180,14 @@ public class DirectoryServiceImpl implements DirectoryService {
 
         Directory saveDir = directoryRepository.save(directory);
 
-        DirectoryDto buildDir = DirectoryDto.builder()
+        return DirectoryDto.builder()
                 .id(saveDir.getId())
                 .name(saveDir.getName())
                 .localDate(saveDir.getAddingDate())
-                .sumSizeFiles(0)
+                .sumSizeFiles("0byte")
                 .countDirectory(0)
                 .countFiles(0)
                 .build();
-
-        return buildDir;
     }
 }
 
