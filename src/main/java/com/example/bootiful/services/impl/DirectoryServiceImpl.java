@@ -12,6 +12,7 @@ import com.example.bootiful.services.RadixSortHelper;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -172,7 +173,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public DirectoryDto createDirectoryFromName(String name) {
+    public DirectoryDto createDirectoryFromName(@NotNull String name) {
         Directory directory = new Directory();
 
         directory.setName(name);

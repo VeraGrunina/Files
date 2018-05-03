@@ -31,7 +31,7 @@ public class Directory {
     @Column(name = "adding_date")
     private LocalDate addingDate;
 
-    @Column(name = "name_dir")
+    @Column(name = "name_dir", nullable = false)
     private String name;
 
     private String pathToDirectory;
