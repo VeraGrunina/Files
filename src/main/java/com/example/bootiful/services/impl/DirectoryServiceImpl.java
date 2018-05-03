@@ -177,13 +177,24 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public Directory createDirectoryFromName(String name) {
+    public DirectoryDto createDirectoryFromName(String name) {
         Directory directory = new Directory();
 
         directory.setName(name);
         directory.setAddingDate(LocalDate.now());
 
-        return directoryRepository.save(directory);
+        Directory saveDir = directoryRepository.save(directory);
+
+        DirectoryDto buildDir = DirectoryDto.builder()
+                .id(saveDir.getId())
+                .name(saveDir.getName())
+                .localDate(saveDir.getAddingDate())
+                .sumSizeFiles(0)
+                .countDirectory(0)
+                .countFiles(0)
+                .build();
+
+        return buildDir;
     }
 }
 

@@ -3,11 +3,19 @@ function addDirectoryOnClick() {
    let input_value = $('#myInput').val();
    let input_button = $('#myBestButton');
 
+   let ajaxData = {
+    name: input_value
+   };
+
+   console.log('sending AJAX REQUEst');
+
+   console.log(ajaxData);
+
    $.ajax({
-       url : "http://localhost:8080/directory/new",
+       url : "http://localhost:8080/directory/",
        type : 'POST',
        dataType : 'json',
-       data : {input_value},
+       data : ajaxData,
        success : function(data1) {
            console.log(data1);
            appendTableBody(data1)

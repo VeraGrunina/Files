@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class DirectoryController {
@@ -23,13 +24,8 @@ public class DirectoryController {
     }
 
     @PostMapping("/directory")
-    public Directory createDirectory(@RequestBody Directory directory) {
-        return directoryService.createDirectory(directory);
-    }
-
-    @PostMapping("/directory/new")
-    public Directory createNewDirectory(@RequestBody String name) {
-        return directoryService.createDirectoryFromName(name);
+    public DirectoryDto createDirectory(@RequestParam Map<String, String> body) {
+        return directoryService.createDirectoryFromName(body.get("name"));
     }
 
     @PutMapping("/directory/{id}")

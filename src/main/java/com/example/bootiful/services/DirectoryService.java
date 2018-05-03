@@ -28,5 +28,5 @@ public interface DirectoryService {
 
   List<DirectorySmallDto> getInnerFileOnClickButton(Long directoryId);
 
-    Directory createDirectoryFromName(String name);
+    DirectoryDto createDirectoryFromName(String name);
 }
