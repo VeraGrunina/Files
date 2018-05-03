@@ -8,17 +8,10 @@ import com.example.bootiful.model.File;
 import java.util.List;
 
 public interface DirectoryService {
-    Directory createDirectory(Directory directory);
-
-    Directory updateDirectory(Directory directory);
-
-    void deleteDirectory(Long id);
 
     List<Directory> getAllDirectory();
 
     Directory getDirectory(Long id);
-
-    public List<File> getFilesInDirectory(Long id);
 
     List<Object> getFirstLevelObjectsInDirectory(Long id);
 
@@ -28,5 +21,5 @@ public interface DirectoryService {
 
   List<DirectorySmallDto> getInnerFileOnClickButton(Long directoryId);
 
-    Directory createDirectoryFromName(String name);
+    DirectoryDto createDirectoryFromName(String name);
 }

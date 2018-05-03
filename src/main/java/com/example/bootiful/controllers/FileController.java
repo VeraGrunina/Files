@@ -29,20 +29,9 @@ public class FileController {
     return fileService.createFile(file);
   }
 
-  @PutMapping("/file/{id}")
-  public File updateDirectory(@PathVariable Long id, @RequestBody File file) {
-    file.setId(id);
-    return fileService.updateFile(file);
-  }
-
   @GetMapping("/file/{id}")
   public File getDirectory(@PathVariable Long id) {
     return fileService.getFile(id);
-  }
-
-  @DeleteMapping("/file/{id}")
-  public void deleteDirectory(@PathVariable Long id) {
-    fileService.deleteFile(id);
   }
 
 }

@@ -13,10 +13,12 @@ import lombok.ToString;
 @Entity(name = "File_Table")
 @Data
 @ToString(exclude = "directory")
+@SequenceGenerator(
+    name = "for-file", sequenceName = "file_with_insert", initialValue = 8, allocationSize = 1)
 public class File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "for-file")
     @Column(name = "file_id", updatable = false, nullable = false)
     protected Long id;
 
@@ -27,6 +29,6 @@ public class File {
     @JoinColumn(name="directory_id")
     private Directory directory;
 
-    private byte sizeFile;
+    private int sizeFile;
 
 }

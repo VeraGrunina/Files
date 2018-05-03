@@ -10,9 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface FileRepository extends JpaRepository<File, Long> {
   List<File> getAllByDirectoryIsInOrderByNameFile(Directory directory);
 
-  int countFilesByDirectory(Directory directory);
-
   int countFilesByDirectoryId(Long directoryId);
-
-  List<File> getAllByDirectoryId(Long directoryId);
 }

@@ -35,25 +35,6 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File updateFile(File file) {
-        if (file == null) {
-            throw new IllegalArgumentException("Can't save empty file");
-        }
-
-        return fileRepository.save(file);
-    }
-
-    @Override
-    public void deleteFile(Long id) {
-        fileRepository.deleteById(id);
-    }
-
-    @Override
-    public List<File> getAllFiles() {
-        return fileRepository.findAll();
-    }
-
-    @Override
     public File getFile(Long id) {
         return fileRepository.findById(id).get();
     }

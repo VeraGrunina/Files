@@ -19,10 +19,12 @@ import lombok.ToString;
 @Data
 @Entity(name = "DIRECTORY_TABLE")
 @ToString(exclude = {"fileSet"})
+@SequenceGenerator(
+    name = "for-dir", sequenceName = "dir_with_insert", initialValue = 14, allocationSize = 1)
 public class Directory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "for-dir")
     @Column(name = "directory_id", updatable = false, nullable = false)
     protected Long id;
 

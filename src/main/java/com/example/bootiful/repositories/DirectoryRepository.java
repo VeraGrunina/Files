@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface DirectoryRepository extends JpaRepository<Directory, Long> {
   List<Directory> findByParentDirectory(Directory parentDirectory);
 
-  int countDirectoryByParentDirectory(Directory parentDirectory);
+  List<Directory> findByParentDirectoryIdOrderByName(Long parentId);
 
   int countDirectoryByParentDirectoryId(Long parentId);
 

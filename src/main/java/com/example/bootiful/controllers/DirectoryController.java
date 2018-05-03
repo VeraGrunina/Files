@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class DirectoryController {
@@ -23,29 +24,13 @@ public class DirectoryController {
     }
 
     @PostMapping("/directory")
-    public Directory createDirectory(@RequestBody Directory directory) {
-        return directoryService.createDirectory(directory);
-    }
-
-    @PostMapping("/directory/new")
-    public Directory createNewDirectory(@RequestBody String name) {
-        return directoryService.createDirectoryFromName(name);
-    }
-
-    @PutMapping("/directory/{id}")
-    public Directory updateDirectory(@PathVariable Long id, @RequestBody Directory directory) {
-        directory.setId(id);
-        return directoryService.updateDirectory(directory);
+    public DirectoryDto createDirectory(@RequestParam Map<String, String> body) {
+        return directoryService.createDirectoryFromName(body.get("name"));
     }
 
     @GetMapping("/directory/{id}")
     public Directory getDirectory(@PathVariable Long id) {
       return directoryService.getDirectory(id);
-    }
-
-    @GetMapping("/directory/{id}/files")
-    public List<File> getFilesByDirectory(@PathVariable Long id) {
-      return directoryService.getFilesInDirectory(id);
     }
 
     @GetMapping("/directory/all")
@@ -88,8 +73,4 @@ public class DirectoryController {
       return directoryService.getInnerFileOnClickButton(id);
   }
 
-    @DeleteMapping("/directory/{id}")
-    public void deleteDirectory(@PathVariable Long id) {
-      directoryService.deleteDirectory(id);
-    }
 }

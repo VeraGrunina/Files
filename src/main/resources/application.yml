@@ -9,7 +9,10 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
   h2:
     console:
       enabled: true
-      path: /consolichka
+      path: /console
